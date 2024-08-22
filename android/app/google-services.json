@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730767701717",
+    "project_id": "fismet-forms",
+    "storage_bucket": "fismet-forms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730767701717:android:7d8aa3a220d918a4fc145c",
+        "android_client_info": {
+          "package_name": "com.fismetbiomedica.fismetformsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUY1STxrRx1XC96mSt62IFrvBYX2zfBE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
