@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fismet_formsapp/login.dart'; // O la ruta correcta donde esté la clase Login
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Firebase Test Home Page'),
+      home: LoginP(),
+      //const MyHomePage(title: 'Firebase Test Home Page'),
     );
   }
 }
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _checkFirestore() async {
     try {
       // Prueba la conexión escribiendo y leyendo desde Firestore
-      await _firestore.collection('test').doc('testDoc').set({'test': 'Hello, JOSE HUAYNASI!'});
+      await _firestore.collection('test').doc('testDoc').set({'test': 'Hello, runtasapitas por siempre setiembre!'});
       DocumentSnapshot snapshot = await _firestore.collection('test').doc('testDoc').get();
       print('Firestore Data: ${snapshot.data()}');
     } catch (e) {
