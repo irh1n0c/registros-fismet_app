@@ -1,36 +1,64 @@
-import 'package:fismet_formsapp/button.dart';
 import 'package:fismet_formsapp/login_text.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginP extends StatelessWidget {
   LoginP({super.key});
   final TextEditingController userController = TextEditingController();
   final TextEditingController password = TextEditingController();
 
+  Future<void> _signIn(BuildContext context) async {
+    try {
+      final email = userController.text;
+      final pass = password.text;
+
+      if (email.isEmpty || pass.isEmpty) {
+        // Manejo de error si los campos están vacíos
+        print('Campos vacíos');
+        return;
+      }
+
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: pass,
+      );
+      print('Usuario autenticado: ${userCredential.user?.email}');
+      Navigator.pushReplacementNamed(context, '/home'); // Redirige al usuario autenticado
+
+    } catch (e) {
+      print('Error en la autenticación: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          margin: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              _header(context),
-              _logo(context),
-              //burbujas de usuario
-              TextFieldInpute(
-                textEditingController: userController,
-                hintText: "Ingrese su usuario: ", 
-                icon: (Icons.account_circle),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                _header(context),
+                _logo(context),
+                //burbuja de usuario
+                TextFieldInpute(
+                  textEditingController: userController,
+                  hintText: "Ingrese su usuario: ", 
+                  icon: Icons.account_circle,
                 ),
-              //burbuja de contraseña
-              TextFieldInpute(
-                textEditingController: password,
-                hintText: "Ingrese su contraseña: ", 
-                icon: (Icons.lock),
+                //burbuja de contraseña
+                TextFieldInpute(
+                  textEditingController: password,
+                  hintText: "Ingrese su contraseña: ", 
+                  icon: Icons.lock,
                 ),
-              MyButton(onTab: (){}, text: "Entrar")  
-            ],
+                ElevatedButton(
+                  onPressed: () => _signIn(context),
+                  child: const Text("Entrar"),
+                ),  
+              ],
+            ),
           ),
         ),
       ),
@@ -57,3 +85,4 @@ class LoginP extends StatelessWidget {
     );
   }
 }
+

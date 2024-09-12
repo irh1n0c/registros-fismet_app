@@ -15,29 +15,29 @@ class TextFieldInpute extends StatelessWidget {
   @override
 Widget build(BuildContext context) {
   return SingleChildScrollView(
-    padding: EdgeInsets.all(16.0),
+    padding: const EdgeInsets.all(16.0),
     child: TextField(
       obscureText: isPass,
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Color(0xFF1d277f),
           //fontSize: 18,
           ),
         prefixIcon: Icon(
           icon,
-          color: Color(0xFF1d277f)),
-        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          color: const Color(0xFF1d277f)),
+        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         border: InputBorder.none,
         filled: true,
-        fillColor: Color.fromARGB(217, 203, 202, 224),
+        fillColor: const Color.fromARGB(217, 203, 202, 224),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(20),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 0.5, color: Color(0xFF1d277f)),
+          borderSide: const BorderSide(width: 0.5, color: Color(0xFF1d277f)),
           borderRadius: BorderRadius.circular(20),
         ),
       ),
