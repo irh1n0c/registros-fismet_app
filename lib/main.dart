@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _checkFirestore() async {
     try {
       // Prueba la conexión escribiendo y leyendo desde Firestore
-      await _firestore.collection('test').doc('testDoc').set({'test': 'Hello, runtasapitas por siempre setiembre!'});
+      await _firestore.collection('test').doc('testDoc').set({'test': 'Hello, runtasapitas por siempre jose jose!'});
       DocumentSnapshot snapshot = await _firestore.collection('test').doc('testDoc').get();
       print('Firestore Data: ${snapshot.data()}');
     } catch (e) {

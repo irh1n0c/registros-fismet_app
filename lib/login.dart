@@ -1,3 +1,4 @@
+import 'package:fismet_formsapp/button.dart';
 import 'package:fismet_formsapp/login_text.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class LoginP extends StatelessWidget {
                 hintText: "Ingrese su contraseña: ", 
                 icon: (Icons.lock),
                 ),
+              MyButton(onTab: (){}, text: "Entrar")  
             ],
           ),
         ),
