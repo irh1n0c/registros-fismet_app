@@ -56,6 +56,18 @@ class LoginP extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => _signIn(context),
                   child: const Text("Entrar"),
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF003A75), // Color de fondo
+                    foregroundColor: Colors.white, // Color del texto
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), // Padding
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                    ),
+                    textStyle: const TextStyle(
+                      fontWeight: FontWeight.w300, // Peso del texto
+                      fontSize: 15, // Tamaño del texto
+                    ),
+                  ),
                 ),  
               ],
             ),

@@ -23,7 +23,8 @@ Widget build(BuildContext context) {
         hintText: hintText,
         hintStyle: const TextStyle(
           color: Color(0xFF1d277f),
-          //fontSize: 18,
+          fontWeight: FontWeight.w300,
+          fontSize: 15,
           ),
         prefixIcon: Icon(
           icon,
