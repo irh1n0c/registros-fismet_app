@@ -5,19 +5,25 @@ class TextFieldInpute extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final IconData icon;
+  final bool obscureText;
+  final ValueChanged<bool>? onObscureTextChanged;
 
   const TextFieldInpute({super.key, 
   required this.textEditingController, 
   this.isPass=false, 
   required this.hintText, 
-  required this.icon});
+  required this.icon,
+  this.obscureText = false,
+  this.onObscureTextChanged,
+  });
+  
 
-  @override
+@override
 Widget build(BuildContext context) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
     child: TextField(
-      obscureText: isPass,
+      obscureText: isPass? obscureText: false,
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: hintText,
@@ -37,14 +43,28 @@ Widget build(BuildContext context) {
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(20),
         ),
+        
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(width: 0.5, color: Color(0xFF1d277f)),
           borderRadius: BorderRadius.circular(20),
         ),
+        suffixIcon: isPass
+            ? IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: const Color(0xFF1d277f),
+                ),
+                onPressed: () {
+                  if (onObscureTextChanged != null) {
+                    onObscureTextChanged!(!obscureText);
+                  }
+                },
+              )
+          : null,
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
 
 /*Widget build(BuildContext context) {

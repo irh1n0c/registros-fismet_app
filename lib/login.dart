@@ -2,15 +2,23 @@ import 'package:fismet_formsapp/login_text.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginP extends StatelessWidget {
+
+class LoginP extends StatefulWidget {
   LoginP({super.key});
+
+  @override
+  _LoginPState createState() => _LoginPState();
+}
+
+class _LoginPState extends State<LoginP> {
   final TextEditingController userController = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool _obscureText = true;
 
   Future<void> _signIn(BuildContext context) async {
     try {
       final email = userController.text;
-      final pass = password.text;
+      final pass = passwordController.text;
 
       if (email.isEmpty || pass.isEmpty) {
         // Manejo de error si los campos están vacíos
@@ -41,34 +49,42 @@ class LoginP extends StatelessWidget {
               children: [
                 _header(context),
                 _logo(context),
-                //burbuja de usuario
+                // Burbuja de usuario
                 TextFieldInpute(
                   textEditingController: userController,
-                  hintText: "Ingrese su usuario: ", 
+                  hintText: "Ingrese su usuario:",
                   icon: Icons.account_circle,
                 ),
-                //burbuja de contraseña
-                TextFieldInpute(
-                  textEditingController: password,
-                  hintText: "Ingrese su contraseña: ", 
+                // Burbuja de contraseña
+                  TextFieldInpute(
+                  textEditingController: passwordController,
+                  hintText: "Ingrese su contraseña:",
                   icon: Icons.lock,
+                  isPass: true, // Indicar que este es un campo de contraseña
+                  obscureText: _obscureText,
+                  onObscureTextChanged: (bool value) {
+                    setState(() {
+                      _obscureText = value;
+                    });
+                  },
                 ),
                 ElevatedButton(
+                  // Botón de login
                   onPressed: () => _signIn(context),
-                  child: const Text("Entrar"),
-                    style: ElevatedButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF003A75), // Color de fondo
                     foregroundColor: Colors.white, // Color del texto
-                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), // Padding
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), // Padding
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                      borderRadius: BorderRadius.circular(25), // Bordes redondeados
                     ),
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.w300, // Peso del texto
                       fontSize: 15, // Tamaño del texto
                     ),
                   ),
-                ),  
+                  child: const Text("Entrar"),
+                ),
               ],
             ),
           ),
