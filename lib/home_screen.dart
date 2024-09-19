@@ -5,7 +5,7 @@ import 'utils/profile_screen.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(color: Colors.grey, width: 0.0),
+            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
           ),
         ),
       ),

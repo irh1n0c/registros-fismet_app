@@ -7,6 +7,7 @@ class LoginP extends StatefulWidget {
   LoginP({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPState createState() => _LoginPState();
 }
 
@@ -22,7 +23,6 @@ class _LoginPState extends State<LoginP> {
 
       if (email.isEmpty || pass.isEmpty) {
         // Manejo de error si los campos están vacíos
-        print('Campos vacíos');
         return;
       }
 
@@ -30,11 +30,11 @@ class _LoginPState extends State<LoginP> {
         email: email,
         password: pass,
       );
-      print('Usuario autenticado: ${userCredential.user?.email}');
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, '/home'); // Redirige al usuario autenticado
 
     } catch (e) {
-      print('Error en la autenticación: $e');
+      ('Error en la autenticación: $e');
     }
   }
 
