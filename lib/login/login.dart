@@ -1,22 +1,21 @@
-import 'package:fismet_formsapp/login_text.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'tmpt/login_text.dart';
 
 
 class LoginP extends StatefulWidget {
-  LoginP({super.key});
+  const LoginP({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LoginPState createState() => _LoginPState();
+  LoginPState createState() => LoginPState();
 }
 
-class _LoginPState extends State<LoginP> {
+class LoginPState extends State<LoginP> {
   final TextEditingController userController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool _obscureText = true;
 
-  Future<void> _signIn(BuildContext context) async {
+  Future<void> _signIn() async {
     try {
       final email = userController.text;
       final pass = passwordController.text;
@@ -26,12 +25,14 @@ class _LoginPState extends State<LoginP> {
         return;
       }
 
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: pass,
       );
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacementNamed(context, '/home'); // Redirige al usuario autenticado
+      
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
 
     } catch (e) {
       ('Error en la autenticación: $e');
@@ -70,17 +71,17 @@ class _LoginPState extends State<LoginP> {
                 ),
                 ElevatedButton(
                   // Botón de login
-                  onPressed: () => _signIn(context),
+                  onPressed: () => _signIn(),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF003A75), // Color de fondo
-                    foregroundColor: Colors.white, // Color del texto
-                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), // Padding
+                    backgroundColor: const Color(0xFF003A75), 
+                    foregroundColor: Colors.white, 
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), 
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25), // Bordes redondeados
+                      borderRadius: BorderRadius.circular(25), 
                     ),
                     textStyle: const TextStyle(
-                      fontWeight: FontWeight.w300, // Peso del texto
-                      fontSize: 15, // Tamaño del texto
+                      fontWeight: FontWeight.w300, 
+                      fontSize: 15, 
                     ),
                   ),
                   child: const Text("Entrar"),

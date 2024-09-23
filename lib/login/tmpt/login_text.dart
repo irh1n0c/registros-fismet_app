@@ -66,21 +66,3 @@ Widget build(BuildContext context) {
     );
   }
 }
-
-/*Widget build(BuildContext context) {
-      return TextField( decoration: InputDecoration(
-        border:  InputBorder.none,
-        filled: true,
-        fillColor: Color(0xFF92fcf6),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
-           borderRadius: BorderRadius.circular(20),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 0.5,color: Color(0xFF1d277f)),
-           borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}*/
