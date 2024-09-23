@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'tmpt/login_text.dart';
 
-
 class LoginP extends StatefulWidget {
   const LoginP({super.key});
 
@@ -17,11 +16,11 @@ class LoginPState extends State<LoginP> {
 
   Future<void> _signIn() async {
     try {
-      final email = userController.text;
-      final pass = passwordController.text;
+      final email = userController.text.trim();
+      final pass = passwordController.text.trim();
 
       if (email.isEmpty || pass.isEmpty) {
-        // Manejo de error si los campos están vacíos
+        _showErrorDialog("Los campos no pueden estar vacíos.");
         return;
       }
 
@@ -29,39 +28,58 @@ class LoginPState extends State<LoginP> {
         email: email,
         password: pass,
       );
-      
+
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/home');
       }
-
     } catch (e) {
-      ('Error en la autenticación: $e');
+      _showErrorDialog("Error en la autenticación: $e");
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Aceptar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.all(24),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity, // Ocupa todo el espacio disponible
+          padding: const EdgeInsets.all(24),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 _header(context),
                 _logo(context),
-                // Burbuja de usuario
                 TextFieldInpute(
                   textEditingController: userController,
                   hintText: "Ingrese su usuario:",
                   icon: Icons.account_circle,
                 ),
-                // Burbuja de contraseña
-                  TextFieldInpute(
+                TextFieldInpute(
                   textEditingController: passwordController,
                   hintText: "Ingrese su contraseña:",
                   icon: Icons.lock,
-                  isPass: true, // Indicar que este es un campo de contraseña
+                  isPass: true,
                   obscureText: _obscureText,
                   onObscureTextChanged: (bool value) {
                     setState(() {
@@ -70,18 +88,17 @@ class LoginPState extends State<LoginP> {
                   },
                 ),
                 ElevatedButton(
-                  // Botón de login
-                  onPressed: () => _signIn(),
+                  onPressed: _signIn,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF003A75), 
-                    foregroundColor: Colors.white, 
-                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0), 
+                    backgroundColor: const Color(0xFF003A75),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 54.0),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25), 
+                      borderRadius: BorderRadius.circular(25),
                     ),
                     textStyle: const TextStyle(
-                      fontWeight: FontWeight.w300, 
-                      fontSize: 15, 
+                      fontWeight: FontWeight.w300,
+                      fontSize: 15,
                     ),
                   ),
                   child: const Text("Entrar"),
@@ -114,4 +131,3 @@ class LoginPState extends State<LoginP> {
     );
   }
 }
-
